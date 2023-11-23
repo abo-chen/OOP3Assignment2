@@ -4,11 +4,28 @@ import utilities.ListADT;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A custom implementation of an array list.
+ * This class provides an array-based list implementation and conforms to the ListADT interface.
+ * 
+ * @param <E> the type of elements in this list
+ */
 public class MyArrayList<E> implements ListADT<E> {
+     /**
+	 * The default initial capacity of the array list.
+     */
     private static final int DEFAULT_CAPACITY = 10;
+	/**
+     * The array buffer into which the elements of the MyArrayList are stored.
+     */
     private E[] data;
+	/**
+     * The size of the MyArrayList (the number of elements it contains).
+     */
     private int size;
-
+	/**
+     * Constructs an empty list with an initial capacity of ten.
+     */
     public MyArrayList() {
         this.data = (E[]) new Object[DEFAULT_CAPACITY];
         this.size = 0;
@@ -23,17 +40,30 @@ public class MyArrayList<E> implements ListADT<E> {
         return copy;
     }
 
+    /**
+     * Returns the number of elements in this list.
+     * 
+     * @return the number of elements in this list
+     */
     @Override
     public int size() {
         return this.size;
     }
 
+    /**
+     * Removes all of the elements from this list.
+     * The list will be empty after this call returns.
+     */
     @Override
     public void clear() {
         this.data = (E[]) new Object[DEFAULT_CAPACITY];
         this.size = 0;
     }
 
+    /**
+     * Ensures that the capacity is sufficient to hold at least the number of elements specified.
+     * If necessary, it increases the capacity of the array list.
+     */
     private void ensureCapacity() {
         if (size >= data.length) {
             E[] newData = (E[]) new Object[data.length * 2];
@@ -162,13 +192,27 @@ public class MyArrayList<E> implements ListADT<E> {
     }
 
     private class MyArrayListIterator implements utilities.Iterator<E> {
+    	/**
+         * Current index of the iterator.
+         */
         private int currentIndex = 0;
 
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * 
+         * @return {@code true} if the iteration has more elements
+         */
         @Override
         public boolean hasNext() {
             return currentIndex < size;
         }
 
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
         @Override
         public E next() throws NoSuchElementException {
             if (!hasNext()) {
@@ -178,6 +222,11 @@ public class MyArrayList<E> implements ListADT<E> {
         }
     }
 
+    /**
+     * Returns an iterator over the elements in this list in proper sequence.
+     * 
+     * @return an iterator over the elements in this list in proper sequence
+     */
     @Override
     public utilities.Iterator<E> iterator() {
         return new MyArrayListIterator();
