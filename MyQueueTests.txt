@@ -1,0 +1,81 @@
+package test;
+
+import utilities.MyQueue;
+import exceptions.EmptyQueueException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MyQueueTests {
+    private MyQueue<String> queue;
+
+    @BeforeEach
+    public void setUp() {
+        queue = new MyQueue<>();
+    }
+
+    @Test
+    public void testEnqueueAndDequeue() {
+        queue.enqueue("First");
+        queue.enqueue("Second");
+        queue.enqueue("Third");
+
+        try {
+            assertEquals("First", queue.dequeue());
+            assertEquals("Second", queue.dequeue());
+            assertEquals("Third", queue.dequeue());
+        } catch (EmptyQueueException e) {
+            fail("Queue should not be empty when dequeuing.");
+        }
+    }
+
+    @Test
+    public void testPeek() {
+        queue.enqueue("Hello");
+        queue.enqueue("World");
+
+        try {
+            assertEquals("Hello", queue.peek());
+            assertEquals(2, queue.size());
+        } catch (EmptyQueueException e) {
+            fail("Queue should not be empty when peeking.");
+        }
+    }
+
+    @Test
+    public void testEmptyQueueException() {
+        assertThrows(EmptyQueueException.class, () -> queue.dequeue());
+        assertThrows(EmptyQueueException.class, () -> queue.peek());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        assertTrue(queue.isEmpty());
+        queue.enqueue("Test");
+        assertFalse(queue.isEmpty());
+    }
+
+    @Test
+    public void testClear() {
+        queue.enqueue("Test");
+        queue.enqueue("Sample");
+        queue.clear();
+        assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void testIterator() {
+        queue.enqueue("One");
+        queue.enqueue("Two");
+        queue.enqueue("Three");
+
+        int count = 0;
+        for (String item : queue) {
+            assertNotNull(item);
+            count++;
+        }
+
+        assertEquals(3, count);
+    }
+}
