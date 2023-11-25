@@ -1,3 +1,7 @@
+package datastructures;
+
+import utilities.StackADT;
+import utilities.Iterator;
 
 public class MyStack<E> implements StackADT<E> {
 
@@ -130,7 +134,8 @@ public class MyStack<E> implements StackADT<E> {
         }
 
         return true;
-
+    }
+    
     @Override
     public int size() {
         return list.size();

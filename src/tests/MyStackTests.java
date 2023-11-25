@@ -1,4 +1,17 @@
+package tests;
 
+import utilities.Iterator;
+import utilities.StackADT;
+import datastructures.MyStack;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MyStackTests {
 

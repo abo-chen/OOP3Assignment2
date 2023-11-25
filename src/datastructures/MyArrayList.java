@@ -1,7 +1,6 @@
 package datastructures;
 
 import utilities.ListADT;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
